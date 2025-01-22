@@ -15,3 +15,6 @@
 	(progn (loop :for (name . attributes) :in components ; Otherwise, copy the components of the prototype
 		     :do (add-component)); #TODO: implement adding components to an entity
 	       id)))) ; Return the id of newly created entity
+
+(defun get-entity (entity-name)
+  (gethash entity-name (ecs-entities *ecs*)))
