@@ -1,7 +1,7 @@
 (in-package :ecs-cl)
 
 (defstruct (component)
-  fields)
+  (fields '()))
 
 (defun defcomponent (name fields)
   ;; Define a new component.
@@ -10,11 +10,16 @@
 
 (defun add-component (component entity-name)
   ;; Add a component to an entity.
-  (if (not (member component (get-entity entity-name))) ;; #TODO: implement get-entity
+  (if (not (member component (get-entity entity-name)))
       (pushnew component (get-entity entity-components))
       (format t "~A already contains a ~A component." (get-entity entity-name) component)))
 
+(defun get-components (entity)
+  (loop for component in (entity-components entity)
+	collect component))
+
 (defun get-component (name)
+  ;; Get a component with a specific name.
   (gethash name (ecs-components *ecs*)))
 
 (defun all-components ()
