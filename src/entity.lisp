@@ -1,3 +1,5 @@
+(in-package :ecs-cl)
+
 (defstruct (entity)
   (components '())
   (attributes '())
@@ -12,7 +14,7 @@
     (setf (gethash id (ecs-entities *ecs*)) (make-entity)) ; Instantiating an entity
     (if (null proto) ; Can copy parameters from a proto to the new entity
 	(values id)  ; If no prototype is specified, just return the id of the new entity
-	(progn (loop :for (name . attributes) :in (get-components proto) ; Otherwise, copy the components of the prototype #TODO: implement get-components
+	(progn (loop :for (name . attributes) :in (get-components proto) ; Otherwise, copy the components of the prototype 
 		     :do (add-component)); #TODO: implement adding components to an entity
 	       id)))) ; Return the id of newly created entity
 

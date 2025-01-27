@@ -8,11 +8,11 @@
   (setf (gethash name (ecs-components *ecs*)) (make-component :fields fields))
   (gethash name (ecs-components *ecs*)))
 
-(defun add-component (component entity-name)
+(defun add-component (component entity)
   ;; Add a component to an entity.
-  (if (not (member component (get-entity entity-name)))
-      (pushnew component (get-entity entity-components))
-      (format t "~A already contains a ~A component." (get-entity entity-name) component)))
+  (if (not (member component (entity-components entity)))
+      (pushnew component (entity-components entity))
+      (format t "~A already contains a ~A component." entity component)))
 
 (defun get-components (entity)
   (loop for component in (entity-components entity)
